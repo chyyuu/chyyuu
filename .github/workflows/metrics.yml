@@ -1,0 +1,26 @@
+
+name: Generate Metrics
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  metrics:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Metrics embed
+        uses: lowlighter/metrics@cf98a50eb63499d520bea42d8129d1cb8682de0f
+        with:
+          token: ${{ secrets.METRICS }}
+          config_timezone: Europe/London
+          plugin_languages: yes
+          plugin_traffic: yes
+          plugin_followup: yes
+          plugin_followup_sections: repositories, users
+          plugin_followup_indepth: yes
+          
